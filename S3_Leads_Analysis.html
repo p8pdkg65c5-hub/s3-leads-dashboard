@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S3 Leads Analysis Dashboard - 2023</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stat-card h3 {
+            color: #667eea;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card .subtitle {
+            color: #718096;
+            font-size: 0.9em;
+        }
+        
+        .section {
+            padding: 40px;
+        }
+        
+        .section h2 {
+            color: #2d3748;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chart-container h3 {
+            color: #4a5568;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        table tr:hover {
+            background: #f7fafc;
+        }
+        
+        .progress-bar {
+            background: #e2e8f0;
+            height: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: width 1s ease;
+        }
+        
+        .alert {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .alert h4 {
+            color: #c53030;
+            margin-bottom: 10px;
+        }
+        
+        .recommendation {
+            background: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .recommendation h4 {
+            color: #22543d;
+            margin-bottom: 10px;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        .tag-success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        
+        .tag-warning {
+            background: #feebc8;
+            color: #7c2d12;
+        }
+        
+        .tag-info {
+            background: #bee3f8;
+            color: #2c5282;
+        }
+        
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 S3 Leads Analysis Dashboard</h1>
+            <p>Comprehensive Analysis of 7,794 Leads | Generated on November 11, 2025</p>
+        </header>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Leads</h3>
+                <div class="number">7,794</div>
+                <div class="subtitle">All leads in database</div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Marketing Qualified</h3>
+                <div class="number">2,961</div>
+                <div class="subtitle">38.0% MQL Rate</div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Sales Accepted</h3>
+                <div class="number">~608</div>
+                <div class="subtitle">20.5% from MQLs</div>
+            </div>
+            
+            <div class="stat-card">
+                <h3>Conversion Rate</h3>
+                <div class="number">7.8%</div>
+                <div class="subtitle">Overall SAL Rate</div>
+            </div>
+        </div>
+        
+        <div class="section" style="background: #f8f9fa;">
+            <h2>🎯 Lead Status Distribution</h2>
+            
+            <div class="chart-container">
+                <h3>Lead Status Breakdown</h3>
+                
+                <div style="margin: 20px 0;">
+                    <strong>New</strong>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 94.3%;">7,346 (94.3%)</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <strong>Qualified</strong>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 5.0%;">391 (5.0%)</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <strong>Unqualified</strong>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0.4%;">32 (0.4%)</div>
+                    </div>
+                </div>
+                
+                <div style="margin: 20px 0;">
+                    <strong>Nurturing</strong>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0.3%;">25 (0.3%)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alert">
+                <h4>⚠️ Critical Finding</h4>
+                <p>94.3% of all leads remain in "New" status. This suggests a significant bottleneck in the lead qualification process that requires immediate attention.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>📈 Funnel Performance</h2>
+            
+            <div class="chart-container">
+                <h3>Lead Funnel Metrics</h3>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Count</th>
+                            <th>% of Total</th>
+                            <th>% of Previous Stage</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Total Leads</strong></td>
+                            <td>7,794</td>
+                            <td>100.0%</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Marketing Qualified Leads (MQL)</strong></td>
+                            <td>2,961</td>
+                            <td>38.0%</td>
+                            <td>38.0%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sales Accepted Leads (SAL)</strong></td>
+                            <td>~608</td>
+                            <td>7.8%</td>
+                            <td>20.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div style="margin-top: 30px;">
+                    <h4 style="color: #4a5568; margin-bottom: 15px;">Funnel Visualization</h4>
+                    <div style="margin: 20px 0;">
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <strong>All Leads</strong>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;">7,794</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <strong>↓ MQL (38.0% conversion)</strong>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 38%;">2,961</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin: 20px 0;">
+                        <div style="text-align: center; margin-bottom: 10px;">
+                            <strong>↓ SAL (20.5% conversion)</strong>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 7.8%;">~608</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section" style="background: #f8f9fa;">
+            <h2>🔍 Data Quality Issues</h2>
+            
+            <div class="chart-container">
+                <h3>Sales Accepted Lead Field Analysis</h3>
+                
+                <div class="alert">
+                    <h4>⚠️ Inconsistent Data Values Detected</h4>
+                    <p>The "Sales Accepted Lead" field contains multiple variations of the same value, which affects reporting accuracy:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>"Sales Accepted"</strong>: 580 leads</li>
+                        <li><strong>"Sales accepted"</strong> (lowercase): 21 leads</li>
+                        <li><strong>"Yes"</strong>: 7 leads</li>
+                        <li><strong>"Not Sales Accepted"</strong>: 58 leads</li>
+                    </ul>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>✅ Recommendation: Data Standardization</h4>
+                    <p>Implement data validation rules to ensure consistent values in the SAL field. Suggested standard values:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li><strong>"Sales Accepted"</strong> - for accepted leads</li>
+                        <li><strong>"Not Accepted"</strong> - for rejected leads</li>
+                        <li><strong>Blank/NULL</strong> - for pending review</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>💡 Key Insights & Recommendations</h2>
+            
+            <div class="chart-container">
+                <h3>Strategic Recommendations</h3>
+                
+                <div class="recommendation">
+                    <h4>1. Address the "New" Lead Bottleneck</h4>
+                    <p>With 94% of leads stuck in "New" status, investigate and optimize your lead qualification workflow:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Review lead scoring criteria</li>
+                        <li>Implement automated lead routing</li>
+                        <li>Increase sales team capacity for lead review</li>
+                        <li>Set up automated nurturing campaigns for unreviewed leads</li>
+                    </ul>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>2. Optimize MQL to SAL Conversion</h4>
+                    <p>Currently only 20.5% of MQLs are accepted by sales. To improve this rate:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Align marketing and sales on MQL definition</li>
+                        <li>Review lead scoring model effectiveness</li>
+                        <li>Analyze characteristics of accepted vs. rejected MQLs</li>
+                        <li>Provide sales team with better lead context and intelligence</li>
+                    </ul>
+                </div>
+                
+                <div class="recommendation">
+                    <h4>3. Improve Data Quality</h4>
+                    <p>Standardize data entry to improve reporting accuracy:</p>
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Implement dropdown menus with predefined values</li>
+                        <li>Run data cleansing on existing records</li>
+                        <li>Set up data validation rules in your CRM</li>
+                        <li>Train team members on proper data entry procedures</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section" style="background: #f8f9fa;">
+            <h2>📊 Summary Statistics</h2>
+            
+            <div class="chart-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Value</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Leads</td>
+                            <td>7,794</td>
+                            <td><span class="tag tag-info">Baseline</span></td>
+                        </tr>
+                        <tr>
+                            <td>MQL Rate</td>
+                            <td>38.0%</td>
+                            <td><span class="tag tag-success">Good</span></td>
+                        </tr>
+                        <tr>
+                            <td>SAL Rate (from MQL)</td>
+                            <td>20.5%</td>
+                            <td><span class="tag tag-warning">Needs Improvement</span></td>
+                        </tr>
+                        <tr>
+                            <td>Overall SAL Rate</td>
+                            <td>7.8%</td>
+                            <td><span class="tag tag-warning">Needs Improvement</span></td>
+                        </tr>
+                        <tr>
+                            <td>Leads in "New" Status</td>
+                            <td>94.3%</td>
+                            <td><span class="tag tag-warning">Critical Issue</span></td>
+                        </tr>
+                        <tr>
+                            <td>Data Quality Issues</td>
+                            <td>Detected</td>
+                            <td><span class="tag tag-warning">Action Required</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <footer>
+            <p><strong>S3 Leads Analysis Dashboard</strong></p>
+            <p>Generated from S3_Leads.xlsx | 7,794 leads analyzed</p>
+            <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9em;">Last Updated: November 11, 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
