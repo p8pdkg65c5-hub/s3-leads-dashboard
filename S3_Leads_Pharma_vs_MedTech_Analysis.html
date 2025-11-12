@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💊 Pharma vs 🩺 MedTech - Lead Generation Insights 2023 to 2025</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #FFFFFF;
+            color: #253734;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #253734 0%, #2d4540 100%);
+            color: white;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .slide {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .slide h2 {
+            color: #253734;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #FFD54F;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .kpi-card.pharma {
+            border-left: 5px solid #ff6b6b;
+        }
+
+        .kpi-card.medtech {
+            border-left: 5px solid #4ecdc4;
+        }
+
+        .kpi-label {
+            font-size: 0.9em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .kpi-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #253734;
+            margin-bottom: 5px;
+        }
+
+        .kpi-subtitle {
+            font-size: 0.95em;
+            color: #868e96;
+        }
+
+        .chart-container {
+            margin: 25px 0;
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin: 20px 0;
+        }
+
+        .insights-box {
+            background: #fff9e6;
+            border-left: 5px solid #FFD54F;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .insights-box h3 {
+            color: #253734;
+            margin-bottom: 12px;
+            font-size: 1.3em;
+        }
+
+        .insights-box ul {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+
+        .insights-box li {
+            margin: 8px 0;
+            line-height: 1.7;
+        }
+
+        .comparison-table {
+            width: 100%;
+            margin: 25px 0;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .comparison-table th {
+            background: #253734;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .metric-high {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .metric-low {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #253734;
+            color: white;
+            margin-top: 40px;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+
+        .highlight {
+            background: #FFD54F;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        @media print {
+            .slide {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💊 Pharma vs 🩺 MedTech</h1>
+            <p>Lead Generation Insights 2023 to 2025</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">S3 Connected Health - Strategic Analysis</p>
+        </header>
+
+        <!-- SLIDE 1: EXECUTIVE SUMMARY -->
+        <div class="slide">
+            <h2>🧾 Slide 1: Executive Summary</h2>
+
+            <div class="kpi-grid">
+                <!-- MedTech KPIs -->
+                <div class="kpi-card medtech">
+                    <div class="kpi-label">🩺 MedTech - Total Leads</div>
+                    <div class="kpi-value">4,043</div>
+                    <div class="kpi-subtitle">75.4% of total pipeline</div>
+                </div>
+
+                <div class="kpi-card medtech">
+                    <div class="kpi-label">🩺 MedTech - MQL Rate</div>
+                    <div class="kpi-value">43.8%</div>
+                    <div class="kpi-subtitle">Conversion: 6.6%</div>
+                </div>
+
+                <div class="kpi-card medtech">
+                    <div class="kpi-label">🩺 MedTech - Quality Scores</div>
+                    <div class="kpi-value">13.3</div>
+                    <div class="kpi-subtitle">Avg Demo Score | Behavioral: 6.6</div>
+                </div>
+
+                <!-- Pharma KPIs -->
+                <div class="kpi-card pharma">
+                    <div class="kpi-label">💊 Pharma - Total Leads</div>
+                    <div class="kpi-value">1,322</div>
+                    <div class="kpi-subtitle">24.6% of total pipeline</div>
+                </div>
+
+                <div class="kpi-card pharma">
+                    <div class="kpi-label">💊 Pharma - MQL Rate</div>
+                    <div class="kpi-value">87.9%</div>
+                    <div class="kpi-subtitle">Conversion: 6.1%</div>
+                </div>
+
+                <div class="kpi-card pharma">
+                    <div class="kpi-label">💊 Pharma - Quality Scores</div>
+                    <div class="kpi-value">8.4</div>
+                    <div class="kpi-subtitle">Avg Demo Score | Behavioral: 9.1</div>
+                </div>
+            </div>
+
+            <div class="insights-box">
+                <h3>📊 Key Findings</h3>
+                <ul>
+                    <li><strong>Volume Leader:</strong> MedTech dominates with <span class="highlight">3× more leads</span> than Pharma (4,043 vs 1,322)</li>
+                    <li><strong>Quality Edge:</strong> Pharma shows <span class="highlight">2× higher MQL rate</span> (87.9% vs 43.8%), indicating better lead qualification</li>
+                    <li><strong>Top Performers:</strong> Simona Nucera leads both segments (976 Pharma, 1,594 MedTech). Philip Brennan dominates MedTech with 1,813 leads</li>
+                    <li><strong>Behavioral Insight:</strong> Pharma leads show higher behavioral scores (9.1 vs 6.6), suggesting more engaged prospects</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: QUARTERLY TRENDS -->
+        <div class="slide">
+            <h2>📊 Slide 2: Lead Volume & Pipeline Trends</h2>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 20px;">Quarterly Lead Volume Comparison (2023-2025)</h3>
+                <div class="chart-wrapper">
+                    <canvas id="quarterlyChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 20px;">Lead Growth Trend by Segment</h3>
+                <div class="chart-wrapper">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+
+            <div class="insights-box">
+                <h3>📈 Trend Analysis</h3>
+                <ul>
+                    <li><strong>Major Spike:</strong> MedTech saw a <span class="highlight">massive surge in Q2 2025</span> (1,740 leads) - likely driven by targeted campaigns or event participation</li>
+                    <li><strong>Steady Growth:</strong> Both segments show acceleration from 2024 Q3 onwards, with MedTech maintaining stronger momentum</li>
+                    <li><strong>Pharma Pattern:</strong> More variable quarterly performance, with peaks in Q2 2023 (176) and Q4 2025 (244)</li>
+                    <li><strong>2025 Performance:</strong> Both segments are on track for record year, with Q4 showing continued strength</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: ORIGINATOR PERFORMANCE -->
+        <div class="slide">
+            <h2>👥 Slide 3: Originator Performance by Segment</h2>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 20px;">Top 10 Originators - Lead Volume by Segment</h3>
+                <div class="chart-wrapper">
+                    <canvas id="originatorChart"></canvas>
+                </div>
+            </div>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Lead Owner</th>
+                        <th>Segment</th>
+                        <th>Lead Count</th>
+                        <th>MQL Rate</th>
+                        <th>Conversion Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Simona Nucera</td>
+                        <td>MedTech</td>
+                        <td>1,594</td>
+                        <td class="metric-high">80.9%</td>
+                        <td>1.0%</td>
+                    </tr>
+                    <tr>
+                        <td>Simona Nucera</td>
+                        <td>Pharma</td>
+                        <td>976</td>
+                        <td class="metric-high">97.7%</td>
+                        <td>1.8%</td>
+                    </tr>
+                    <tr>
+                        <td>Philip Brennan</td>
+                        <td>MedTech</td>
+                        <td>1,813</td>
+                        <td>9.4%</td>
+                        <td>2.5%</td>
+                    </tr>
+                    <tr>
+                        <td>James Brennan</td>
+                        <td>MedTech</td>
+                        <td>253</td>
+                        <td>4.0%</td>
+                        <td class="metric-high">13.4%</td>
+                    </tr>
+                    <tr>
+                        <td>James Brennan</td>
+                        <td>Pharma</td>
+                        <td>116</td>
+                        <td>2.6%</td>
+                        <td>2.6%</td>
+                    </tr>
+                    <tr>
+                        <td>Piotr Sokolowski</td>
+                        <td>MedTech</td>
+                        <td>134</td>
+                        <td class="metric-high">94.8%</td>
+                        <td class="metric-high">53.0%</td>
+                    </tr>
+                    <tr>
+                        <td>Raymond Crosbie</td>
+                        <td>MedTech</td>
+                        <td>145</td>
+                        <td>52.4%</td>
+                        <td class="metric-high">35.2%</td>
+                    </tr>
+                    <tr>
+                        <td>Brian Flatley</td>
+                        <td>Pharma</td>
+                        <td>95</td>
+                        <td class="metric-high">100.0%</td>
+                        <td class="metric-high">29.5%</td>
+                    </tr>
+                    <tr>
+                        <td>Matt Norton</td>
+                        <td>Pharma</td>
+                        <td>87</td>
+                        <td class="metric-high">96.6%</td>
+                        <td class="metric-high">19.5%</td>
+                    </tr>
+                    <tr>
+                        <td>Bill Betten</td>
+                        <td>MedTech</td>
+                        <td>58</td>
+                        <td class="metric-high">93.1%</td>
+                        <td class="metric-high">43.1%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="insights-box">
+                <h3>🎯 Originator Insights</h3>
+                <ul>
+                    <li><strong>Volume Champions:</strong> Philip Brennan (MedTech) and Simona Nucera (both) drive the highest lead volumes</li>
+                    <li><strong>Quality Leaders:</strong> Piotr Sokolowski shows <span class="highlight">exceptional conversion (53%)</span> in MedTech, while Brian Flatley leads Pharma conversion (29.5%)</li>
+                    <li><strong>Specialization Patterns:</strong> Clear expertise clustering - some originators excel in specific segments</li>
+                    <li><strong>Opportunity:</strong> Cross-train high-volume originators on conversion techniques from quality leaders</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: CONVERSION METRICS -->
+        <div class="slide">
+            <h2>💶 Slide 4: Lead Quality & Conversion Efficiency</h2>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 20px;">Quality Metrics Comparison</h3>
+                <div class="chart-wrapper">
+                    <canvas id="qualityChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 20px;">Conversion Funnel Efficiency</h3>
+                <div class="chart-wrapper">
+                    <canvas id="conversionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="insights-box">
+                <h3>💡 Efficiency Analysis</h3>
+                <ul>
+                    <li><strong>Pharma Advantage:</strong> Despite lower volume, Pharma leads show <span class="highlight">higher engagement</span> (9.1 behavioral score vs 6.6)</li>
+                    <li><strong>MQL Rate Gap:</strong> Pharma's 87.9% MQL rate is <span class="highlight">2× higher</span> than MedTech's 43.8%, indicating better targeting or qualification</li>
+                    <li><strong>Similar Conversion:</strong> Final conversion rates are nearly identical (6.6% MedTech vs 6.1% Pharma)</li>
+                    <li><strong>Quality vs Quantity:</strong> MedTech generates volume; Pharma generates qualified engagement - both strategies have merit</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: STRATEGIC INSIGHTS -->
+        <div class="slide">
+            <h2>💡 Slide 5: Strategic Insights & Opportunities</h2>
+
+            <div class="chart-container">
+                <h3 style="margin-bottom: 20px;">Overall Lead Distribution (2023-2025)</h3>
+                <div class="chart-wrapper" style="height: 300px;">
+                    <canvas id="shareChart"></canvas>
+                </div>
+            </div>
+
+            <div class="insights-box">
+                <h3>🎯 Key Takeaways</h3>
+                <ul>
+                    <li><strong>1. Volume vs Quality Trade-off:</strong> MedTech provides <span class="highlight">75% of pipeline volume</span>, while Pharma delivers higher-quality, more engaged leads (87.9% MQL rate)</li>
+                    <li><strong>2. 2025 Acceleration:</strong> Both segments showing strong growth in 2025, with MedTech's Q2 spike (1,740 leads) suggesting successful campaign execution - replicate this approach</li>
+                    <li><strong>3. Conversion Parity Opportunity:</strong> Despite different MQL rates, both convert at ~6% - opportunity to improve MedTech qualification to reduce wasted effort on unqualified leads</li>
+                </ul>
+            </div>
+
+            <div class="insights-box" style="background: #e8f5e9; border-left-color: #4caf50;">
+                <h3>🚀 Strategic Recommendations</h3>
+                <ul>
+                    <li><strong>For Sales Team:</strong>
+                        <ul style="margin-left: 25px; margin-top: 8px;">
+                            <li>Deploy Pharma qualification tactics to MedTech pipeline to improve MQL rate</li>
+                            <li>Leverage Piotr Sokolowski and Raymond Crosbie's conversion techniques across all MedTech reps</li>
+                            <li>Investigate Q2 2025 MedTech success factors for replication in other quarters/segments</li>
+                        </ul>
+                    </li>
+                    <li><strong>For Marketing Team:</strong>
+                        <ul style="margin-left: 25px; margin-top: 8px;">
+                            <li>Scale Pharma lead generation while maintaining quality (currently only 24.6% of pipeline)</li>
+                            <li>Apply Pharma targeting criteria to MedTech campaigns to improve lead quality</li>
+                            <li>Develop segment-specific nurture programs based on behavioral score patterns</li>
+                        </ul>
+                    </li>
+                    <li><strong>Overall Strategy:</strong>
+                        <ul style="margin-left: 25px; margin-top: 8px;">
+                            <li>Balance portfolio: <span class="highlight">Maintain MedTech volume advantage while closing Pharma volume gap</span></li>
+                            <li>Create Center of Excellence model pairing high-volume originators with high-conversion specialists</li>
+                            <li>Implement predictive scoring to identify which MedTech leads will behave like Pharma quality leads</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Confidential - S3 Connected Health</strong></p>
+            <p style="margin-top: 10px;">Data Source: S3_Leads.xlsx | Analysis Period: 2023-2025 | Total Leads Analyzed: 5,365</p>
+            <p style="margin-top: 10px; opacity: 0.8;">Generated: November 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js configurations
+        const chartColors = {
+            pharma: '#ff6b6b',
+            medtech: '#4ecdc4',
+            pharmaBorder: '#e63946',
+            medtechBorder: '#2a9d8f'
+        };
+
+        // Slide 2 - Quarterly Stacked Bar Chart
+        const quarterlyCtx = document.getElementById('quarterlyChart').getContext('2d');
+        new Chart(quarterlyCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2023 Q1', '2023 Q2', '2023 Q3', '2023 Q4', '2024 Q1', '2024 Q2', '2024 Q3', '2024 Q4', '2025 Q1', '2025 Q2', '2025 Q3', '2025 Q4'],
+                datasets: [{
+                    label: 'MedTech',
+                    data: [36, 113, 107, 84, 172, 130, 207, 308, 267, 1740, 418, 461],
+                    backgroundColor: chartColors.medtech,
+                    borderColor: chartColors.medtechBorder,
+                    borderWidth: 2
+                }, {
+                    label: 'Pharma',
+                    data: [33, 176, 45, 129, 149, 161, 18, 63, 37, 109, 158, 244],
+                    backgroundColor: chartColors.pharma,
+                    borderColor: chartColors.pharmaBorder,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: { font: { size: 14 } }
+                    },
+                    title: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: { stacked: true, grid: { display: false } },
+                    y: { stacked: true, beginAtZero: true, title: { display: true, text: 'Lead Count' } }
+                }
+            }
+        });
+
+        // Slide 2 - Trend Line Chart
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: ['2023 Q1', '2023 Q2', '2023 Q3', '2023 Q4', '2024 Q1', '2024 Q2', '2024 Q3', '2024 Q4', '2025 Q1', '2025 Q2', '2025 Q3', '2025 Q4'],
+                datasets: [{
+                    label: 'MedTech',
+                    data: [36, 113, 107, 84, 172, 130, 207, 308, 267, 1740, 418, 461],
+                    borderColor: chartColors.medtechBorder,
+                    backgroundColor: chartColors.medtech + '40',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3
+                }, {
+                    label: 'Pharma',
+                    data: [33, 176, 45, 129, 149, 161, 18, 63, 37, 109, 158, 244],
+                    borderColor: chartColors.pharmaBorder,
+                    backgroundColor: chartColors.pharma + '40',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { font: { size: 14 } } }
+                },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'Lead Volume' } }
+                }
+            }
+        });
+
+        // Slide 3 - Originator Grouped Bar Chart
+        const originatorCtx = document.getElementById('originatorChart').getContext('2d');
+        new Chart(originatorCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Simona Nucera', 'Philip Brennan', 'James Brennan', 'Piotr Sokolowski', 'Raymond Crosbie', 'Brian Flatley', 'Matt Norton', 'Bill Betten'],
+                datasets: [{
+                    label: 'MedTech',
+                    data: [1594, 1813, 253, 134, 145, 13, 12, 58],
+                    backgroundColor: chartColors.medtech,
+                    borderColor: chartColors.medtechBorder,
+                    borderWidth: 2
+                }, {
+                    label: 'Pharma',
+                    data: [976, 10, 116, 4, 8, 95, 87, 1],
+                    backgroundColor: chartColors.pharma,
+                    borderColor: chartColors.pharmaBorder,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { font: { size: 14 } } }
+                },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'Lead Count' } }
+                }
+            }
+        });
+
+        // Slide 4 - Quality Metrics
+        const qualityCtx = document.getElementById('qualityChart').getContext('2d');
+        new Chart(qualityCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Demographic Score', 'Behavioral Score'],
+                datasets: [{
+                    label: 'MedTech',
+                    data: [13.3, 6.6],
+                    backgroundColor: chartColors.medtech,
+                    borderColor: chartColors.medtechBorder,
+                    borderWidth: 2
+                }, {
+                    label: 'Pharma',
+                    data: [8.4, 9.1],
+                    backgroundColor: chartColors.pharma,
+                    borderColor: chartColors.pharmaBorder,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { font: { size: 14 } } }
+                },
+                scales: {
+                    y: { beginAtZero: true, title: { display: true, text: 'Average Score' } }
+                }
+            }
+        });
+
+        // Slide 4 - Conversion Funnel
+        const conversionCtx = document.getElementById('conversionChart').getContext('2d');
+        new Chart(conversionCtx, {
+            type: 'bar',
+            data: {
+                labels: ['MQL Rate (%)', 'Conversion Rate (%)'],
+                datasets: [{
+                    label: 'MedTech',
+                    data: [43.8, 6.6],
+                    backgroundColor: chartColors.medtech,
+                    borderColor: chartColors.medtechBorder,
+                    borderWidth: 2
+                }, {
+                    label: 'Pharma',
+                    data: [87.9, 6.1],
+                    backgroundColor: chartColors.pharma,
+                    borderColor: chartColors.pharmaBorder,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'top', labels: { font: { size: 14 } } }
+                },
+                scales: {
+                    y: { beginAtZero: true, max: 100, title: { display: true, text: 'Percentage (%)' } }
+                }
+            }
+        });
+
+        // Slide 5 - Pie Chart
+        const shareCtx = document.getElementById('shareChart').getContext('2d');
+        new Chart(shareCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['MedTech', 'Pharma'],
+                datasets: [{
+                    data: [4043, 1322],
+                    backgroundColor: [chartColors.medtech, chartColors.pharma],
+                    borderColor: [chartColors.medtechBorder, chartColors.pharmaBorder],
+                    borderWidth: 3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { size: 16 }, padding: 20 }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                let value = context.parsed;
+                                let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                let percentage = ((value / total) * 100).toFixed(1);
+                                return label + ': ' + value.toLocaleString() + ' leads (' + percentage + '%)';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
