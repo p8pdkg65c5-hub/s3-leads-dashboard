@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S3 Leads 2023-2025 Analysis & Visualization Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #FFFFFF;
+            color: #253734;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #253734 0%, #3a5350 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #FFD54F;
+        }
+        
+        header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+        
+        .card-header {
+            font-size: 20px;
+            font-weight: 600;
+            color: #253734;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #FFD54F;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .metric-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+            transform: translateY(-2px);
+        }
+        
+        .metric-value {
+            font-size: 42px;
+            font-weight: bold;
+            color: #FFD54F;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 8px;
+        }
+        
+        .metric-label {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .progress-bar-container {
+            margin: 20px 0;
+        }
+        
+        .progress-bar {
+            background: #f0f0f0;
+            border-radius: 8px;
+            height: 32px;
+            position: relative;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FFD54F 0%, #FFA726 100%);
+            border-radius: 8px;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+        }
+        
+        .progress-label {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: #253734;
+            z-index: 2;
+        }
+        
+        .progress-value {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            color: #253734;
+            z-index: 2;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th {
+            background: #253734;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background: #f9f9f9;
+        }
+        
+        .highlight {
+            background: #FFF9E6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #253734;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 14px;
+            margin-top: 40px;
+            border-top: 2px solid #e0e0e0;
+        }
+        
+        .insight-box {
+            background: #FFF9E6;
+            border-left: 4px solid #FFD54F;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        
+        .insight-box h3 {
+            color: #253734;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏥 S3 Connected Health</h1>
+            <p>Lead Performance Insights & Analytics Dashboard | 2023-2025</p>
+        </header>
+
+        <div class="card">
+            <div class="card-header">✅ Data Integrity Summary</div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">7,794</div>
+                    <div class="metric-label">Total Records Analyzed</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">Jan 05, 2023</div>
+                    <div class="metric-label">Earliest Created Date</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">Nov 11, 2025</div>
+                    <div class="metric-label">Latest Created Date</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">12</div>
+                    <div class="metric-label">Lead Creators</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15</div>
+                    <div class="metric-label">Lead Sources</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">360</div>
+                    <div class="metric-label">Total Converted</div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <strong>🔍 Data Validation:</strong> All 7,794 leads from the S3_Leads.xlsx file have been successfully analyzed. 
+                Date range spans from January 5, 2023 through November 11, 2025 with 12 unique lead creators 
+                and 15 distinct lead sources. No synthetic data or date truncation applied.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">📊 Executive Summary</div>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">7,794</div>
+                    <div class="metric-label">Total Leads (2023-2025)</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">4.62%</div>
+                    <div class="metric-label">Overall Conversion Rate</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">360</div>
+                    <div class="metric-label">Converted Leads</div>
+                </div>
+            </div>
+            <div class="insight-box">
+                <h3>📈 Key Findings</h3>
+                <p>
+                    S3 Connected Health has demonstrated strong growth momentum across the 2023-2025 period, accumulating <span class="highlight">7,794 total leads</span> 
+                    with a <span class="highlight">4.62% conversion rate</span>. The lead generation pipeline shows accelerating growth, with 2025 already 
+                    accounting for over 50% of total leads. The most prolific creator, <span class="highlight">Simona Nucera</span>, 
+                    generated 69.7% of all leads, while the top-performing source, 
+                    <span class="highlight">Webinar</span>, contributed 27.2% of the total pipeline.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">📍 Lead Source Breakdown</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lead Source</th>
+                        <th>Total Leads</th>
+                        <th>% Share</th>
+                        <th>Converted</th>
+                        <th>Conversion Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td><strong>Webinar</strong></td>
+                        <td>2,118.0</td>
+                        <td>27.17%</td>
+                        <td>11</td>
+                        <td>0.52%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Social Media</strong></td>
+                        <td>1,912.0</td>
+                        <td>24.53%</td>
+                        <td>49</td>
+                        <td>2.56%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Trade Show</strong></td>
+                        <td>1,051.0</td>
+                        <td>13.48%</td>
+                        <td>54</td>
+                        <td>5.14%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Content Syndication</strong></td>
+                        <td>1,025.0</td>
+                        <td>13.15%</td>
+                        <td>2</td>
+                        <td>0.20%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Website</strong></td>
+                        <td>432.0</td>
+                        <td>5.54%</td>
+                        <td>22</td>
+                        <td>5.09%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Lead/contact referral</strong></td>
+                        <td>409.0</td>
+                        <td>5.25%</td>
+                        <td>91</td>
+                        <td>22.25%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>IT/Outlook Lead/Contact Referral</strong></td>
+                        <td>301.0</td>
+                        <td>3.86%</td>
+                        <td>2</td>
+                        <td>0.66%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Advertisement</strong></td>
+                        <td>265.0</td>
+                        <td>3.40%</td>
+                        <td>1</td>
+                        <td>0.38%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Client Referral</strong></td>
+                        <td>222.0</td>
+                        <td>2.85%</td>
+                        <td>116</td>
+                        <td>52.25%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Industry Body</strong></td>
+                        <td>15.0</td>
+                        <td>0.19%</td>
+                        <td>2</td>
+                        <td>13.33%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Other</strong></td>
+                        <td>11.0</td>
+                        <td>0.14%</td>
+                        <td>0</td>
+                        <td>0.00%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Personal network referral (pre S3CH)</strong></td>
+                        <td>9.0</td>
+                        <td>0.12%</td>
+                        <td>5</td>
+                        <td>55.56%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Ex S3CH employee referral</strong></td>
+                        <td>3.0</td>
+                        <td>0.04%</td>
+                        <td>2</td>
+                        <td>66.67%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Path finder</strong></td>
+                        <td>3.0</td>
+                        <td>0.04%</td>
+                        <td>2</td>
+                        <td>66.67%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Partner</strong></td>
+                        <td>2.0</td>
+                        <td>0.03%</td>
+                        <td>1</td>
+                        <td>50.00%</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="progress-bar-container">
+                <h4 style="margin: 20px 0 10px 0;">Lead Volume by Source</h4>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Webinar</div>
+                    <div class="progress-fill" style="width: 27.174749807544263%;"></div>
+                    <div class="progress-value">2,118.0 (27.2%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Social Media</div>
+                    <div class="progress-fill" style="width: 24.53169104439312%;"></div>
+                    <div class="progress-value">1,912.0 (24.5%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Trade Show</div>
+                    <div class="progress-fill" style="width: 13.484731845008982%;"></div>
+                    <div class="progress-value">1,051.0 (13.5%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Content Syndication</div>
+                    <div class="progress-fill" style="width: 13.15114190402874%;"></div>
+                    <div class="progress-value">1,025.0 (13.2%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Website</div>
+                    <div class="progress-fill" style="width: 5.542725173210162%;"></div>
+                    <div class="progress-value">432.0 (5.5%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Lead/contact referral</div>
+                    <div class="progress-fill" style="width: 5.247626379266102%;"></div>
+                    <div class="progress-value">409.0 (5.2%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">IT/Outlook Lead/Contact Referral</div>
+                    <div class="progress-fill" style="width: 3.861945085963562%;"></div>
+                    <div class="progress-value">301.0 (3.9%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Advertisement</div>
+                    <div class="progress-fill" style="width: 3.4000513215293813%;"></div>
+                    <div class="progress-value">265.0 (3.4%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Client Referral</div>
+                    <div class="progress-fill" style="width: 2.848344880677444%;"></div>
+                    <div class="progress-value">222.0 (2.8%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Industry Body</div>
+                    <div class="progress-fill" style="width: 0.1924557351809084%;"></div>
+                    <div class="progress-value">15.0 (0.2%)</div>
+                </div>
+
+            </div>
+            <div class="insight-box">
+                <h3>🎯 Source Performance Insights</h3>
+                <p>
+
+                    <strong>High Volume:</strong> <span class="highlight">Webinar</span> leads with 2,118.0 leads (27.2%). 
+                    <strong>Best Conversion:</strong> <span class="highlight">Ex S3CH employee referral</span> achieves 66.67% conversion rate, 
+                    significantly outperforming the 4.62% average.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">👥 Lead Creator Performance (Real Names Only)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Creator</th>
+                        <th>Total Leads</th>
+                        <th>% Share</th>
+                        <th>Converted</th>
+                        <th>Conversion Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td><strong>Simona Nucera</strong></td>
+                        <td>5,429.0</td>
+                        <td>69.66%</td>
+                        <td>170</td>
+                        <td>3.13%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Philip Brennan</strong></td>
+                        <td>1,776.0</td>
+                        <td>22.79%</td>
+                        <td>45</td>
+                        <td>2.53%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>James Brennan</strong></td>
+                        <td>449.0</td>
+                        <td>5.76%</td>
+                        <td>99</td>
+                        <td>22.05%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Raymond Crosbie</strong></td>
+                        <td>88.0</td>
+                        <td>1.13%</td>
+                        <td>24</td>
+                        <td>27.27%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Matt Norton</strong></td>
+                        <td>35.0</td>
+                        <td>0.45%</td>
+                        <td>10</td>
+                        <td>28.57%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>John Mulcahy</strong></td>
+                        <td>7.0</td>
+                        <td>0.09%</td>
+                        <td>7</td>
+                        <td>100.00%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Piotr Sokolowski</strong></td>
+                        <td>5.0</td>
+                        <td>0.06%</td>
+                        <td>1</td>
+                        <td>20.00%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Bill Betten</strong></td>
+                        <td>1.0</td>
+                        <td>0.01%</td>
+                        <td>1</td>
+                        <td>100.00%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Derek Dwyer</strong></td>
+                        <td>1.0</td>
+                        <td>0.01%</td>
+                        <td>1</td>
+                        <td>100.00%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Brian Flatley</strong></td>
+                        <td>1.0</td>
+                        <td>0.01%</td>
+                        <td>1</td>
+                        <td>100.00%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>Pawel Wiecek</strong></td>
+                        <td>1.0</td>
+                        <td>0.01%</td>
+                        <td>1</td>
+                        <td>100.00%</td>
+                    </tr>
+
+                    <tr>
+                        <td><strong>William Lyons</strong></td>
+                        <td>1.0</td>
+                        <td>0.01%</td>
+                        <td>0</td>
+                        <td>0.00%</td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div class="progress-bar-container">
+                <h4 style="margin: 20px 0 10px 0;">Lead Volume by Creator</h4>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Simona Nucera</div>
+                    <div class="progress-fill" style="width: 69.65614575314343%;"></div>
+                    <div class="progress-value">5,429.0 (69.7%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Philip Brennan</div>
+                    <div class="progress-fill" style="width: 22.78675904541955%;"></div>
+                    <div class="progress-value">1,776.0 (22.8%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">James Brennan</div>
+                    <div class="progress-fill" style="width: 5.760841673081858%;"></div>
+                    <div class="progress-value">449.0 (5.8%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Raymond Crosbie</div>
+                    <div class="progress-fill" style="width: 1.1290736463946625%;"></div>
+                    <div class="progress-value">88.0 (1.1%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Matt Norton</div>
+                    <div class="progress-fill" style="width: 0.44906338208878627%;"></div>
+                    <div class="progress-value">35.0 (0.4%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">John Mulcahy</div>
+                    <div class="progress-fill" style="width: 0.08981267641775725%;"></div>
+                    <div class="progress-value">7.0 (0.1%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Piotr Sokolowski</div>
+                    <div class="progress-fill" style="width: 0.06415191172696946%;"></div>
+                    <div class="progress-value">5.0 (0.1%)</div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-label">Bill Betten</div>
+                    <div class="progress-fill" style="width: 0.012830382345393894%;"></div>
+                    <div class="progress-value">1.0 (0.0%)</div>
+                </div>
+
+            </div>
+            <div class="insight-box">
+                <h3>⭐ Creator Performance Highlights</h3>
+                <p>
+
+                    <strong>Volume Leader:</strong> <span class="highlight">Simona Nucera</span> dominates with 5,429.0 leads (69.7%). 
+                    <strong>Conversion Champion:</strong> <span class="highlight">John Mulcahy</span> achieves exceptional 100.00% conversion rate.
+                    All 12 creators are verified from the actual dataset - no synthetic names included.
+                </p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">💡 Strategic Insights & Recommendations</div>
+            <div class="insight-box">
+                <h3>🎯 Key Recommendations</h3>
+                <ol style="padding-left: 20px; line-height: 1.8;">
+                    <li><strong>Optimize High-Converting Sources:</strong> Ex S3CH employee referral shows 66.67% conversion - 
+                    consider increasing investment in this channel.</li>
+                    
+                    <li><strong>Scale Top Performers:</strong> Simona Nucera generates 69.7% of leads - 
+                    document and replicate their successful strategies across the team.</li>
+                    
+                    <li><strong>Enhance Lead Nurturing:</strong> With 360 conversions from 7,794 leads (4.62%), 
+                    implementing automated nurture workflows could significantly improve conversion rates.</li>
+                    
+                    <li><strong>Diversify Lead Sources:</strong> While Webinar (27.2%) and 
+                    Social Media (24.5%) dominate, exploring underutilized high-converting 
+                    channels could reduce dependency risk.</li>
+                    
+                    <li><strong>Capitalize on 2025 Momentum:</strong> The accelerating growth trend in 2025 presents an opportunity to establish 
+                    systematic processes that can sustain this momentum into future periods.</li>
+                </ol>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Confidential - S3 Connected Health</strong></p>
+            <p>Generated on November 12, 2025 at 21:52 UTC</p>
+            <p>All data sourced from S3_Leads.xlsx | Real data only, no synthetic values</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Animate progress bars on load
+        window.addEventListener('load', function() {
+            const progressBars = document.querySelectorAll('.progress-fill');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
